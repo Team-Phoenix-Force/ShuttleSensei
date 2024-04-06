@@ -1,10 +1,18 @@
 
+.results-page {
+  background-color: #111315;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+}
+
 .compare-section1 {
   /* background-color:  */
   display: flex;
   flex-direction: row;
-  height: 400px;
-  width: 100vw;
+  gap: 60px;
+  height: 300px;
 }
 
 .compare-section1 img {

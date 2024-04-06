@@ -10,10 +10,10 @@ import 'react-tabs/style/react-tabs.css';
 
 const Results = () => {
   const [page, setPage] = useState('Compare');
-  const [rally, setRally] = useState('1');
+  const [rally, setRally] = useState('Rally 1');
 
   const pages = ['Compare', 'Player1', 'Player2']
-  const rallies = ['1', '2', '3', '4', '5']
+  const rallies = ['Rally 1', 'Rally 2', 'Rally 3', 'Rally 4', 'Rally 5']
 
   const [playerDataArray, setPlayerDataArray] = useState([
     { 
@@ -45,11 +45,11 @@ const Results = () => {
   }
 
   return (
-    <>
+    <div className='results-page'>
+      <div>
+        <Dropdown list={pages} toggleFunction={togglePage} />
+      </div>
       <div className='compare-section1'>
-        <div>
-          <Dropdown list={pages} toggleFunction={togglePage} />
-        </div>
         <img src={CroppedPlayer2Image} alt='player2' />
 
         <div>
@@ -61,10 +61,8 @@ const Results = () => {
     
         <img src={Player1image} alt='player1' />
       </div>
-      <h1 style={{color:'green'}}>{page}</h1>
       
       <Dropdown list={rallies} toggleFunction={toggleRally} />
-      <h1 style={{color:'green'}}>{rally}</h1>
       <div className='compare-section-2'>
         <h3>Analyze by</h3>
         <Tabs>
@@ -105,7 +103,7 @@ const Results = () => {
         </Tabs>
       </div>
 
-    </>
+    </div>
   )
 }
 
