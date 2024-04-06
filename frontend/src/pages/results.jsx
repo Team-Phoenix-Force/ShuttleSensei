@@ -17,7 +17,7 @@ import 'react-tabs/style/react-tabs.css';
 
 const Results = () => {
   const [page, setPage] = useState('Compare');
-  const pages = ['Compare', 'Player1', 'Player2'];
+  const pages = ['Compare', 'player1', 'player2'];
 
   const [rally, setRally] = useState({
     player1: {
@@ -79,6 +79,8 @@ const Results = () => {
     },
   ]);
 
+  const [summary, setSummary] = useState('');
+
   const totalShots = rallyArray.reduce((acc, rally) => {
     return {
       player1: {
@@ -124,7 +126,6 @@ const Results = () => {
           <h1>Player2</h1>
           <h5>Comparative analysis</h5>
         </div>
-    
         <img src={Player1image} alt='player1' />
       </div>
 
@@ -133,7 +134,9 @@ const Results = () => {
           
           <div className='compare-section-2'>
           <div className='rallies'>
-          <Dropdown list={rallies} toggleFunction={toggleRally} />
+            {page !== 'Compare' && (
+              <Dropdown list={rallies} toggleFunction={toggleRally} />
+            )}
             <h2 className='analyze'>Analyze by</h2>
             </div>
             <Tabs>
@@ -170,17 +173,40 @@ const Results = () => {
               </TabPanel>
 
               <TabPanel >
-              <div className="tablist">
-                <img src={combinedPosDistimg}  width={900} height={500}   alt='combined-pos-dist' />
+                <div className="tablist">
+                  <img src={combinedPosDistimg}  width={900} height={500}   alt='combined-pos-dist' />
                 </div>
               </TabPanel>
 
               <TabPanel>
-              <div className="tablist">
-                <img src={shotDistPlayer1img}  width={900} height={500}   alt='shot-dist-p1' />
+                <div className="tablist">
+                  {page === 'Compare' && (
+                    <img src={shotDistPlayer1img}  width={900} height={500}   alt='shot-dist-p1' />
+                  )}
+                  <table>
+                    <tr>
+                      <td>Smash</td>
+                      <td> {page==='player1' ? (rally.player1.smash) : (rally.player2.smash)} </td>
+                    </tr>
+                    <tr>
+                      <td>Drop</td>
+                      <td> {page==='player1' ? (rally.player1.drop) : (rally.player2.drop)} </td>
+                    </tr>
+                    <tr>
+                      <td>Clear</td>
+                      <td> {page==='player1' ? (rally.player1.clear) : (rally.player2.clear)} </td>
+                    </tr>
+                    <tr>
+                      <td>Drive</td>
+                      <td> {page==='player1' ? (rally.player1.drive) : (rally.player2.drive)} </td>
+                    </tr>
+                  </table>
                 </div>
               </TabPanel>
             </Tabs>
+            {page === 'Compare' && (
+              <p> {summary} </p>
+            )}
           </div>
         </div>
         <div className='compare-section-two-right'>
