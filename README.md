@@ -69,3 +69,18 @@ Refer to respective documentation for installation instructions.
 
 **Note:** Use code with caution.
 
+## Research Papers
+
+A collection of research papers related to badminton AI coaching is available in the `references` folder of the repository. Some notable papers include:
+
+- "[Actionformer](https://arxiv.org/abs/2202.07925)" - Actionformer: Transformer-Based Framework for Action Recognition
+- "[SlowFastNetwork](https://arxiv.org/abs/1812.03982)" - SlowFast Networks for Video Recognition
+- "[VisionTransformer](https://paperswithcode.com/method/vision-transformer)" - Vision Transformer
+- "[Attention is all you Need](https://arxiv.org/abs/1706.03762)" - Attention is All You Need
+
+Please refer to the respective papers for more detailed information.
+
+
+
+
+
