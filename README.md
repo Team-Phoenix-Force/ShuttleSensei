@@ -1,6 +1,18 @@
 # ShuttleSensei - Badminton AI Coach
 
-This project aims to develop an AI coach for badminton singles matches, offering analysis and coaching recommendations by processing gameplay videos.
+Inspired by the transformative impact of self-attention based Transformer models in various computer vision tasks, including image classification and object detection, [ActionFormer](https://arxiv.org/abs/2110.02452) emerged as a pioneering solution for temporal action localization in videos. However, the original ActionFormer faced computational challenges due to its reliance on a single-shot approach with transformers handling both classification and regression tasks.
+
+In response to these challenges, this repository presents an enhanced version of ActionFormer specifically tailored for temporal action localization, with a primary focus on badminton videos. Our approach addresses the limitations of the original model by splitting the task into two distinct stages: initial boundary regression followed by refined action classification and boundary regression, leveraging an improved ActionFormer architecture.
+
+The first stage employs a separate model dedicated to boundary regression, allowing for efficient approximation of action boundaries. Subsequently, the output from this stage is seamlessly integrated into a streamlined ActionFormer, featuring enhanced attention mechanisms optimized for precise action classification and boundary regression.
+
+Through this innovative approach, our model achieves a remarkable mean Average Precision (mAP) of 93 on badminton video datasets, representing a significant improvement over the performance of the original ActionFormer, even after transfer learning. Our method demonstrates the effectiveness of combining specialized boundary regression with ActionFormer's attention mechanisms to achieve highly precise temporal action localization.
+
+For further details on self-attention mechanisms, refer to [Transformers: Attention is All You Need](https://arxiv.org/abs/1706.03762). To learn more about the original ActionFormer, see the paper [ActionFormer: Unifying Transformers for Temporal Action Localization and Recognition](https://arxiv.org/abs/2110.02452). Additionally, details about the task of temporal action localization (TAL) can be found in [Temporal Action Localization](https://arxiv.org/abs/2003.06814).
+
+---
+
+
 
 ## Features
 
