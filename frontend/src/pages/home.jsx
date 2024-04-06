@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Home = () => {
-  const API_URL = "https://d9be-34-126-100-141.ngrok-free.app/post_example";
+  const API_URL = "https://d9be-34-126-100-141.ngrok-free.app";
   const navigate = useNavigate();
 
   const [acknowledged, setAcknowledged] = useState(false);
@@ -17,7 +17,7 @@ const Home = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const response = await axios.post(API_URL, {
+      const response = await axios.post(`${API_URL}/post`, {
         videoLink: videoLink,
       },
       {
