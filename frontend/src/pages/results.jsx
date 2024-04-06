@@ -9,6 +9,7 @@ import shotDistPlayer1img from "../images/shots_dist_p1.png";
 import shotDistPlayer2img from "../images/shots_dist_p2.png";
 import posDistp1img from "../images/pos_dist_p1_img.png";
 import combinedPosDistimg from "../images/combined_pos_dist_img.jpg";
+import combinedShotDistimg from "../images/combined_shot_dist_img.jpg";
 import winErrorShots from "../images/win_error_shots.png";
 
 import "../styles/results.css";
@@ -137,7 +138,9 @@ const Results = () => {
               <Dropdown list={rallies} toggleFunction={toggleRally} />
               <h2 className="analyze">Analyze by</h2>
             </div>
+
             <Tabs>
+
               <TabList className="tablist-2">
                 <Tab color="red">
                   {page === "Compare" ? "Rally Time" : "Attacking Pattern"}
@@ -155,39 +158,76 @@ const Results = () => {
               </TabList>
 
               <TabPanel>
-                {/* {page === 'Compare' && (
-                )} */}
                 <div className="tablist">
-                  <img
-                    src={rallyTimeDistimg}
-                    width={900}
-                    height={500}
-                    alt="rally-time-distribution"
-                  />
+                  {page === 'Compare' ? (
+                    <img
+                      src={rallyTimeDistimg}
+                      width={900}
+                      height={500}
+                      alt="rally-time-dist"
+                    />
+                  ) : (
+                    <img
+                      src={rallyTimeDistimg}
+                      width={900}
+                      height={500}
+                      alt="rally-time-dist"
+                    />
+                  )}
                 </div>
               </TabPanel>
 
               <TabPanel>
                 <div className="tablist">
+                  {page === 'Compare' ? (
+                    <img
+                      src={combinedPosDistimg}
+                      width={900}
+                      height={500}
+                      alt="combined-pos-dist"
+                    />
+                  ) : (
+                    <img
+                      src={combinedShotDistimg}
+                      width={900}
+                      height={500}
+                      alt="combined-shot-dist"
+                    />
+                  )}
+                </div>
+              </TabPanel>
+
+              <TabPanel>
+                {page === 'Compare' ? (
                   <img
                     src={combinedPosDistimg}
                     width={900}
                     height={500}
                     alt="combined-pos-dist"
                   />
-                </div>
+                ) : (
+                  <table className="table1">
+                    <th>Player2</th>
+                    <tr>
+                      <td>Smash</td>
+                      <td> {page === 'Player1' ? rally.player1.smash : rally.player2.smash} </td>
+                    </tr>
+                    <tr>
+                      <td>Drop</td>
+                      <td> {page === 'Player1' ? rally.player1.drop : rally.player2.drop} </td>
+                    </tr>
+                    <tr>
+                      <td>Clear</td>
+                      <td> {page === 'Player1' ? rally.player1.clear : rally.player2.clear} </td>
+                    </tr>
+                    <tr>
+                      <td>Drive</td>
+                      <td> {page === 'Player1' ? rally.player1.drive : rally.player2.drive} </td>
+                    </tr>
+                  </table>
+                )}
               </TabPanel>
 
-              <TabPanel>
-                <div className="tablist">
-                  <img
-                    src={shotDistPlayer1img}
-                    width={900}
-                    height={500}
-                    alt="shot-dist-p1"
-                  />
-                </div>
-              </TabPanel>
             </Tabs>
             {page === 'Compare' && (
               <p> {summary} </p>
