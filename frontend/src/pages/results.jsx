@@ -1,112 +1,250 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import Dropdown from '../components/dropdown'
-import Player2image from '../images/player2.png'
-import Player1image from '../images/player1.webp'
-import CroppedPlayer2Image from '../images/cropped_player2.png'
-import '../styles/results.css'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Dropdown from "../components/dropdown";
+import Player2image from "../images/player2.png";
+import Player1image from "../images/player1.webp";
+import CroppedPlayer2Image from "../images/cropped_player2.png";
+import rallyTimeDistimg from "../images/rally_time_dist_img.jpg";
+import shotDistPlayer1img from "../images/shots_dist_p1.png";
+import shotDistPlayer2img from "../images/shots_dist_p2.png";
+import posDistp1img from "../images/pos_dist_p1_img.png";
+import combinedPosDistimg from "../images/combined_pos_dist_img.jpg";
+import winErrorShots from "../images/win_error_shots.png";
+
+import "../styles/results.css";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
 const Results = () => {
-  const [page, setPage] = useState('Compare');
-  const [rally, setRally] = useState('1');
+  const [page, setPage] = useState("Compare");
+  const pages = ["Compare", "Player1", "Player2"];
 
-  const pages = ['Compare', 'Player1', 'Player2']
-  const rallies = ['1', '2', '3', '4', '5']
-
-  const [playerDataArray, setPlayerDataArray] = useState([
-    { 
-      id: 1,
-      player: 'Player1',
+  const [rally, setRally] = useState({
+    player1: {
       smash: 10,
       drop: 20,
       clear: 30,
       drive: 40,
     },
-    {
-      id: 2,
-      player: 'Player2',
+    player2: {
       smash: 10,
       drop: 20,
       clear: 30,
       drive: 40,
+    },
+  });
+
+  const [rallyArray, setRallyArray] = useState([
+    {
+      player1: {
+        smash: 10,
+        drop: 20,
+        clear: 30,
+        drive: 40,
+      },
+      player2: {
+        smash: 10,
+        drop: 20,
+        clear: 30,
+        drive: 40,
+      },
+    },
+    {
+      player1: {
+        smash: 10,
+        drop: 20,
+        clear: 30,
+        drive: 40,
+      },
+      player2: {
+        smash: 10,
+        drop: 20,
+        clear: 30,
+        drive: 40,
+      },
+    },
+    {
+      player1: {
+        smash: 10,
+        drop: 20,
+        clear: 30,
+        drive: 40,
+      },
+      player2: {
+        smash: 10,
+        drop: 20,
+        clear: 30,
+        drive: 40,
+      },
     },
   ]);
 
+  const totalShots = rallyArray.reduce((acc, rally) => {
+    return {
+      player1: {
+        smash: acc.player1.smash + rally.player1.smash,
+        drop: acc.player1.drop + rally.player1.drop,
+        clear: acc.player1.clear + rally.player1.clear,
+        drive: acc.player1.drive + rally.player1.drive,
+      },
+      player2: {
+        smash: acc.player2.smash + rally.player2.smash,
+        drop: acc.player2.drop + rally.player2.drop,
+        clear: acc.player2.clear + rally.player2.clear,
+        drive: acc.player2.drive + rally.player2.drive,
+      },
+    };
+  });
+
+  const rallies = rallyArray.map((rally, index) => {
+    return `Rally ${index + 1}`;
+  });
+
   const togglePage = (newPage) => {
-    console.log('new page : ', newPage)
-    setPage(newPage)
-  }
+    console.log("new page : ", newPage);
+    setPage(newPage);
+  };
 
   const toggleRally = (newRally) => {
-    console.log('new rally : ', newRally)
-    setRally(newRally)
-  }
+    console.log("new rally : ", newRally);
+    const rallyIndex = parseInt(newRally.split(" ")[1]) - 1;
+    setRally(rallyArray[rallyIndex]);
+  };
 
   return (
-    <>
-      <div className='compare-section1'>
-        <div>
-          <Dropdown list={pages} toggleFunction={togglePage} />
-        </div>
-        <img src={CroppedPlayer2Image} alt='player2' />
-
-        <div>
-          <h1>Player1 </h1>
-          <h5> VS </h5>
-          <h1>Player2</h1>
-          <h5>Comparative analysis</h5>
-        </div>
-    
-        <img src={Player1image} alt='player1' />
+    <div className="results-page">
+      <div className="dropdown-1_1">
+        <Dropdown list={pages} toggleFunction={togglePage} />
       </div>
-      <h1 style={{color:'green'}}>{page}</h1>
-      
-      <Dropdown list={rallies} toggleFunction={toggleRally} />
-      <h1 style={{color:'green'}}>{rally}</h1>
-      <div className='compare-section-2'>
-        <h3>Analyze by</h3>
-        <Tabs>
-          <TabList>
-            <Tab>Attacking  pattern</Tab>
-            <Tab>Shot type</Tab>
-            <Tab>Winner and error shots</Tab>
-          </TabList>
+      <div className="compare-section-one">
+        <img src={CroppedPlayer2Image} alt="player2" />
+        <div className="div1">
+          <h1>Player1 </h1>
+          <h2 className="h5_1"> VS </h2>
+          <h1>Player2</h1>
+          <h4 className="h4_1">Comparative analysis</h4>
+        </div>
 
-          <TabPanel>
-            <img src={Player1image} alt='player1' />
-          </TabPanel>
+        <img src={Player1image} alt="player1" />
+      </div>
 
-          <TabPanel>
-            <table>
+      <div className="compare-section-two">
+        <div className="compare-section-two-left">
+          <div className="compare-section-2">
+            <div className="rallies">
+              <Dropdown list={rallies} toggleFunction={toggleRally} />
+              <h2 className="analyze">Analyze by</h2>
+            </div>
+            <Tabs>
+              <TabList className="tablist-2">
+                <Tab color="red">
+                  {page === "Compare" ? "Rally Time" : "Attacking Pattern"}
+                </Tab>
+                <Tab>
+                  {page === "Compare"
+                    ? "Combined Position Distribution"
+                    : "Position Distribution"}
+                </Tab>
+                <Tab>
+                  {page === "Compare"
+                    ? "Combined Shot Distribution"
+                    : "Shot Distribution"}
+                </Tab>
+              </TabList>
+
+              <TabPanel>
+                {/* {page === 'Compare' && (
+                )} */}
+                <div className="tablist">
+                  <img
+                    src={rallyTimeDistimg}
+                    width={900}
+                    height={500}
+                    alt="rally-time-distribution"
+                  />
+                </div>
+              </TabPanel>
+
+              <TabPanel>
+                <div className="tablist">
+                  <img
+                    src={combinedPosDistimg}
+                    width={900}
+                    height={500}
+                    alt="combined-pos-dist"
+                  />
+                </div>
+              </TabPanel>
+
+              <TabPanel>
+                <div className="tablist">
+                  <img
+                    src={shotDistPlayer1img}
+                    width={900}
+                    height={500}
+                    alt="shot-dist-p1"
+                  />
+                </div>
+              </TabPanel>
+            </Tabs>
+          </div>
+        </div>
+
+        <div className="compare-section-two-right p1">
+        <div>
+        <div className="table0">
+        <table className="table1">
+              <th>Player1</th>
               <tr>
                 <td>Smash</td>
-                <td>10</td>
+                <td> {totalShots.player1.smash} </td>
               </tr>
               <tr>
                 <td>Drop</td>
-                <td>20</td>
+                <td> {totalShots.player1.drop}</td>
               </tr>
               <tr>
                 <td>Clear</td>
-                <td>30</td>
+                <td>{totalShots.player1.clear}</td>
               </tr>
               <tr>
                 <td>Drive</td>
-                <td>40</td>
+                <td>{totalShots.player1.drive}</td>
               </tr>
             </table>
-          </TabPanel>
-
-          <TabPanel>
-            <img src={CroppedPlayer2Image} alt='player2' />
-          </TabPanel>
-        </Tabs>
+            <table className="table1">
+              <th>Player2</th>
+              <tr>
+                <td>Smash</td>
+                <td> {totalShots.player2.smash} </td>
+              </tr>
+              <tr>
+                <td>Drop</td>
+                <td> {totalShots.player2.drop}</td>
+              </tr>
+              <tr>
+                <td>Clear</td>
+                <td>{totalShots.player2.clear}</td>
+              </tr>
+              <tr>
+                <td>Drive</td>
+                <td>{totalShots.player2.drive}</td>
+              </tr>
+            </table>
+            </div>
+        </div>
+         <div className="imgdiv">
+      <img
+        src={winErrorShots}
+        className="winErrorShots"
+   
+        alt="win-error-shots"
+      />
       </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-    </>
-  )
-}
-
-export default Results
+export default Results;
