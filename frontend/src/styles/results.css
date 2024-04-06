@@ -6,7 +6,35 @@
   flex-direction: column;
   font-family: 'Roboto', sans-serif;
 }
+.winErrorShots{
+ 
 
+}
+.dropdown-1_1{
+  display: flex;
+margin-left:100px;
+  align-items: center;
+
+}
+.analyze{
+  margin-left: 340px;
+  font-weight: bold;
+}
+.rallies{
+  display: flex;
+}
+.tablist{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ 
+ padding: 20px 40px;
+}
+.tablist-2{
+  
+  margin-left: 180px;
+  margin-bottom: 20px;
+}
 .compare-section-one {
   /* background-color:  */
   display: flex;

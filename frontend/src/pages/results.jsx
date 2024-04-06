@@ -113,7 +113,7 @@ const Results = () => {
 
   return (
     <div className='results-page'>
-      <div>
+      <div className="dropdown-1_1"   >
         <Dropdown list={pages} toggleFunction={togglePage} />
       </div>
       <div className='compare-section-one'>
@@ -130,19 +130,22 @@ const Results = () => {
 
       <div className='compare-section-two'>
         <div className='compare-section-two-left'>
-          <Dropdown list={rallies} toggleFunction={toggleRally} />
+          
           <div className='compare-section-2'>
-            <h3>Analyze by</h3>
+          <div className='rallies'>
+          <Dropdown list={rallies} toggleFunction={toggleRally} />
+            <h2 className='analyze'>Analyze by</h2>
+            </div>
             <Tabs>
-              <TabList>
-                <Tab>
+              <TabList className="tablist-2">
+                <Tab >
                   {page === 'Compare' ? (
                     'Rally Time'
                   ) : (
                     'Attacking Pattern'
                   )}
                 </Tab>
-                <Tab>
+                <Tab >
                   {page === 'Compare' ? (
                     'Combined Position Distribution'
                   ) : (
@@ -158,22 +161,24 @@ const Results = () => {
                 </Tab>
               </TabList>
 
-              <TabPanel>
+              <TabPanel  >
                 {/* {page === 'Compare' && (
                 )} */}
-                  <>
-                    <img src={rallyTimeDistimg} alt='rally-time-distribution' />
-                  </>
+                  <div className="tablist" >
+                    <img src={rallyTimeDistimg} width={900} height={500}  alt='rally-time-distribution' />
+                  </div>
+              </TabPanel>
+
+              <TabPanel >
+              <div className="tablist">
+                <img src={combinedPosDistimg}  width={900} height={500}   alt='combined-pos-dist' />
+                </div>
               </TabPanel>
 
               <TabPanel>
-                <img src={combinedPosDistimg} alt='combined-pos-dist' />
-              </TabPanel>
-
-              <TabPanel>
-
-                <img src={shotDistPlayer1img} alt='shot-dist-p1' />
-
+              <div className="tablist">
+                <img src={shotDistPlayer1img}  width={900} height={500}   alt='shot-dist-p1' />
+                </div>
               </TabPanel>
             </Tabs>
           </div>
@@ -218,7 +223,7 @@ const Results = () => {
             </tr>
           </table>
 
-          <img src={winErrorShots} alt='win-error-shots' />
+          <img src={winErrorShots} className='winErrorShots' alt='win-error-shots' />
 
         </div>
       </div>

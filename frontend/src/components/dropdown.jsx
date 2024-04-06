@@ -8,7 +8,8 @@ const Dropdown = ({ list, toggleFunction }) => {
   }
 
   return (
-    <select onChange={handleChange}>
+    <select onChange={handleChange} className='dropdown-1' style={{padding:"10px 0px",color:"white",marginTop:"15px",marginLeft:"80px",fontWeight:"bolder",backgroundColor:"black", height:"40px", width:"100px"}}>
+    
       {list.map((item, index) => {
         return (
           <option 
