@@ -1,0 +1,52 @@
+.main{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  padding: 0 0 !important;
+  
+    transform:translate(-50px,-50px);
+   
+   
+}
+.main-2{
+    height: 100%;
+    width:100%;
+}
+.main-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:#5cccc9;
+    width: 50%;
+    height: 100%;
+}
+.div{
+   
+    display: flex;
+    width: 400px;
+    justify-content: space-around;
+    align-items: center;
+}
+.button{
+font: 1.2rem;
+background-color: white;
+color: black;
+padding:10px 20px;
+margin-right: 20px;
+
+}
+.p{
+    color: white;
+    font-size: 2rem;
+}
+.h1_1{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 5rem;
+}
+.main-2{
+    background-color: pink;
+    width: 50%;
+    height: 100%;
+}
