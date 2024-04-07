@@ -6,11 +6,12 @@ import "./styles.css";
 import a  from "../images/download (1).jpeg"
 
 const Home = () => {
-  const API_URL = "https://d9be-34-126-100-141.ngrok-free.app";
+  const API_URL = "https://5fa4-35-237-195-78.ngrok-free.app";
   const navigate = useNavigate();
 
   const [acknowledged, setAcknowledged] = useState(false);
   const [videoLink, setVideoLink] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleChange = (e) => {
     setVideoLink(e.target.value);
@@ -23,6 +24,7 @@ const Home = () => {
         `${API_URL}/post`,
         {
           videoLink: videoLink,
+          email: email,
         },
         {
           headers: {
@@ -44,26 +46,7 @@ const Home = () => {
 <h1 className="h1_1">Shuttle Sensei</h1>
 <h2 className="p">Practise Badminton with me</h2>
 <div className="div">
-<p className="p">Enter link here</p>
-<input></input>
-</div>
-<div className="div">
-<p className="p">Enter your mail</p>
-<input></input>
-</div>
-<br></br>
-<div>
-<button className="button">Submit</button>
-<button className="button">Show Results</button>
-</div>
-   </div>
-   <div className="main-2">
-   <img src={a} height={700} width={800} alt='player1' />
-   </div>
-      </div>
-
-      <div>home</div>
-      <form>
+<form>
         <label>Video Link</label>
         <input
           type="text"
@@ -71,12 +54,27 @@ const Home = () => {
           onChange={handleChange}
           placeholder="Enter the Google Drive link of the video"
         />
+        <br></br>
+        <label>Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+        />
         <input type="submit" onClick={handleSubmit} />
       </form>
 
-      <button onClick={() => navigate("/compare")} disabled={!acknowledged}>
+      <button onClick={() => navigate("/results")} disabled={!acknowledged}>
         Show Results
       </button>
+</div>
+   </div>
+   <div className="main-2">
+   <img src={a} height={700} width={800} alt='player1' />
+   </div>
+      </div>
+      
     </>
   );
 };

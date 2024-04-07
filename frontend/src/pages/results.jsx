@@ -18,7 +18,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
 const Results = () => {
-  const API_URL = "https://d9be-34-126-100-141.ngrok-free.app";
+  const API_URL = "https://5fa4-35-237-195-78.ngrok-free.app";
   const [page, setPage] = useState("Compare");
   const pages = ["Compare", "Player1", "Player2"];
 
@@ -59,29 +59,35 @@ const Results = () => {
   const [newRallyData, setNewRallyData] = useState([]);
   const [rallies, setRallies] = useState([]);
   const [rallyIndex, setRallyIndex] = useState(0);
+  const [img,setImg] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/get`);
+        const response = await axios.get(`${API_URL}/get/img`,{
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          },
+        });
         console.log(response);
+        setImg(response.data);
         const newData = {
-          positionDistribution : URL.createObjectURL(new Blob([response.data.positionDistribution], { type: 'image/png' })),
-          positionDistributionP1: URL.createObjectURL(new Blob([response.data.positionDistributionP1], { type: 'image/png' })),
-          rallyTimeDistribution : URL.createObjectURL(new Blob([response.data.rallyTimeDistribution], { type: 'image/png' })),
-          shotTypeDistributionP1 : URL.createObjectURL(new Blob([response.data.shotTypeDistributionP1], { type: 'image/png' })),
-          shotsDistributionP1 : URL.createObjectURL(new Blob([response.data.shotsDistributionP1], { type: 'image/png' })),
-          shotsDistributionP2 : URL.createObjectURL(new Blob([response.data.shotsDistributionP2], { type: 'image/png' })),
+          positionDistribution : URL.createObjectURL(new Blob([response.data.position_distribution], { type: 'image/png' })),
+          positionDistributionP1: URL.createObjectURL(new Blob([response.data.position_distribution_p1], { type: 'image/png' })),
+          rallyTimeDistribution : URL.createObjectURL(new Blob([response.data.rally_time_distribution], { type: 'image/png' })),
+          shotTypeDistributionP1 : URL.createObjectURL(new Blob([response.data.shot_type_distribution_p1], { type: 'image/png' })),
+          shotsDistributionP1 : URL.createObjectURL(new Blob([response.data.shots_distribution_p1], { type: 'image/png' })),
+          shotsDistributionP2 : URL.createObjectURL(new Blob([response.data.shots_distribution_p2], { type: 'image/png' })),
           summary : response.data.summary,
-          rallyData : response.data.rallyData,
-          totalPoints: response.data.totalPoints,
-          totalShotTypesP1: response.data.totalShotTypesP1,
-          totalShotTypesP2: response.data.totalShotTypesP2
+          rallyData : response.data.rally_data,
+          totalPoints: response.data.total_points,
+          totalShotTypesP1: response.data.total_shot_types_p1,
+          totalShotTypesP2: response.data.total_shot_types_p2
         }
 
         setResults(newData);
 
-        newRallyData = response.data.rallyData.map((rally, index) => {
+        newRallyData = response.data.rally_data.map((rally, index) => {
           const player1Shots = rally.player1.shots.split(",");
           const player2Shots = rally.player2.shots.split(",");
           const player1ShotsFreq = {
@@ -199,7 +205,7 @@ const Results = () => {
                 <div className="tablist">
                   {page === 'Compare' ? (
                     <img
-                      src={results.rallyTimeDistribution}
+                      src={img}
                       width={900}
                       height={500}
                       alt="rally-time-dist"
@@ -316,13 +322,13 @@ const Results = () => {
           </div>
         </div>
          <div className="imgdiv">
-      <img
-        src={winErrorShots}
-        className="winErrorShots"
-   
-        alt="win-error-shots"
-      />
-      </div>
+          <img
+            src={winErrorShots}
+            className="winErrorShots"
+      
+            alt="win-error-shots"
+          />
+          </div>
         </div>
       </div>
     </div>
