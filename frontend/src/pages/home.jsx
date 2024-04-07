@@ -5,7 +5,7 @@ import "./styles.css";
 import badmintonImage from "../images/download (1).jpeg";
 
 const Home = () => {
-  const API_URL = "https://7d47-35-237-195-78.ngrok-free.app";
+  const API_URL = "https://6f16-35-245-205-171.ngrok-free.app";
   const navigate = useNavigate();
 
   const [videoLink, setVideoLink] = useState("");
@@ -23,7 +23,7 @@ const Home = () => {
     try {
       e.preventDefault();
       const response = await axios.post(
-        `${API_URL}/images`,
+        `${API_URL}/post`,
         {
           videoLink: videoLink,
           email: email,
@@ -81,7 +81,7 @@ const Home = () => {
           </button>
           <button
             className="button show-results"
-            onClick={() => navigate("/compare")}
+            onClick={() => navigate("/results")}
             disabled={!videoLink}
           >
             Show Results

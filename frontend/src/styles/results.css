@@ -1,17 +1,16 @@
-
 .results-page {
   background-color:white;
   border: 2px solid black;
 
-    box-shadow: 2px -20px 40px rgba(0, 0, 0, 0.5);
+  font-family: 'Courier New', Courier, monospace;
   
   color: #fff;
   display: flex;
   flex-direction: column;
-  font-family: 'Roboto', sans-serif;
+
 }
 .winErrorShots{
- height: 350px;
+ height: 320px;
  width: 400px;
 
 }
@@ -21,9 +20,32 @@
   
 }
 .react-tabs .react-tabs__tab {
-  color: greenyellow; /* Change to desired color */
-  background-color: black;
+  color: black; /* Change to desired color */
+  background-color: greenyellow;
+font-weight: bold;
+  margin-right: 20px;
+  font-size: 1rem;
+  border-radius: 20px;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: black;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:green; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: orange; 
+}
+
 .h4_1{
 
 font-size: 1.2rem;
@@ -33,7 +55,7 @@ height: 100px;
 text-align: center;
 }
 .div1{
-  color: greenyellow;
+  color: black;
   text-align: center;
   width: 200px;
 }
@@ -66,6 +88,9 @@ margin-bottom: 20px;
 .analyze{
   margin-left: 340px;
   font-weight: bold;
+  color: black;
+  font-size: 1.8rem;
+  transform: translateX(-136px);
 }
 .rallies{
   display: flex;
@@ -85,9 +110,10 @@ margin-bottom: 20px;
 }
 .compare-section-one {
   
-    background: radial-gradient(circle, black,white);
-   
-  
+    background: radial-gradient(circle,white,green);
+   font-family: 'Courier New', Courier, monospace;
+   border: 20px solid black !important;
+border-radius: 20px;
   /* background-color:  */
   display: flex;
   flex-direction: row;
@@ -107,8 +133,9 @@ margin-bottom: 20px;
 }
 
 .compare-section-two {
- background-color: ;
+
   display: flex;
+
   flex-direction: row;
   gap: 30px;
   height: auto;
@@ -124,6 +151,7 @@ td {
   background-color: linear-gradient(90deg, rgba(255, 255, 255, 0.5), rgba(26, 37, 48, 0));
 }
 th, td {
+  font-weight: bold;
   padding: 8px;
   text-align: left;
 }
@@ -131,4 +159,6 @@ th, td {
   border: 2px solid black;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

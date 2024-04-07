@@ -10,7 +10,9 @@ import shotDistPlayer2img from "../images/shots_dist_p2.png";
 import posDistp1img from "../images/pos_dist_p1_img.png";
 import combinedPosDistimg from "../images/combined_pos_dist_img.jpg";
 import combinedShotDistimg from "../images/combined_shot_dist_img.jpg";
-import winErrorShots from "../images/win_error_shots.png";
+import winErrorShots1 from "../images/WinErrShots1.png";
+import winErrorShots2 from "../images/WinErrShots2.png";
+import winErrorShots3 from "../images/WinErrShots3.png";
 import axios from "axios";
 import ReactMarkdown from 'react-markdown';
 
@@ -18,7 +20,7 @@ import "../styles/results.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-const Results = () => {
+const Results = () => {  
   const API_URL = "http://localhost:8000/api/hackbyte/";
   const [page, setPage] = useState("Compare");
   const pages = ["Compare", "Player1", "Player2"];
@@ -66,7 +68,7 @@ const Results = () => {
           headers: {
             "ngrok-skip-browser-warning": "true",
           },
-          withCredentials: true
+          withCredentials: true,
         });
         console.log(response);
         setImg(response.data);
@@ -126,7 +128,6 @@ const Results = () => {
             },
             rallyNumber: index
           }
-
         })
 
         setNewRallyData(newRallyArrayData);
@@ -182,7 +183,7 @@ const Results = () => {
               {page !== "Compare" && (
                 <Dropdown list={rallies} toggleFunction={toggleRally} />
               )}
-              <h2 className="analyze">Analyze by</h2>
+              <h2 className="analyze"> In depth analysis</h2>
             </div>
 
             <Tabs>
@@ -272,7 +273,7 @@ const Results = () => {
                     </tr>
                     <tr>
                       <td>Smash</td>
-                      <td> {page === 'Player1' ? newRallyData[rallyIndex].player1.smash : newRallyData.player2.smash} </td>
+                      <td> {page === 'Player1' ? newRallyData[rallyIndex].player1.smash : newRallyData[rallyIndex].player2.smash} </td>
                     </tr>
                   </table>
                 )}
@@ -280,7 +281,7 @@ const Results = () => {
             </Tabs>
             {page === 'Compare' && (
               <div style={{color:'black'}}>
-                {/* <ReactMarkdown>{results.summary} </ReactMarkdown> */}
+                {/* <ReactMarkdown>{mdText} </ReactMarkdown> */}
                 <p>{results.summary}</p>
               </div>
             )}
@@ -331,8 +332,10 @@ const Results = () => {
           </div>
         </div>
          <div className="imgdiv">
+          <h3 style={{color:'#000', fontWeight: 'bold'}}> Winning & Error Shots</h3>
+
           <img
-            src={winErrorShots}
+            src={ page==='Compare' ? winErrorShots1 : (page==='Player1' ? winErrorShots2 : winErrorShots3)}
             className="winErrorShots"
             alt="win-error-shots"
           />
