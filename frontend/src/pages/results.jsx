@@ -12,19 +12,18 @@ import combinedPosDistimg from "../images/combined_pos_dist_img.jpg";
 import combinedShotDistimg from "../images/combined_shot_dist_img.jpg";
 import winErrorShots from "../images/win_error_shots.png";
 import axios from "axios";
+import ReactMarkdown from 'react-markdown';
 
 import "../styles/results.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
 const Results = () => {
-  const API_URL = "https://5fa4-35-237-195-78.ngrok-free.app";
+  const API_URL = "http://localhost:8000/api/hackbyte/";
   const [page, setPage] = useState("Compare");
   const pages = ["Compare", "Player1", "Player2"];
 
   const [results, setResults] = useState({
-    positionDistribution : 
-    "",
     positionDistributionP1: 
     "",
     rallyTimeDistribution : 
@@ -34,9 +33,8 @@ const Results = () => {
     shotsDistributionP1 : 
     "",
     shotsDistributionP2 : "",
-    summary : 
-    "**Player 1**\n\n**Strengths:**\n\n* Excellent shot anticipation\n* Strong clears\n* Good court coverage\n\n**Weaknesses:**\n\n* Footwork needs improvement\n* Struggles with high-speed rallies\n* Tends to make unforced errors\n\n**Improvement Plan:**\n\n* Focus on improving footwork drills to enhance speed and agility on the court.\n* Introduce interval training to enhance endurance and stamina for extended rallies.\n* Implement a strategy to minimize unforced errors by emphasizing accuracy and timing.\n\n**Match Analysis:**\n\n* **Rally 1:** Player 1 demonstrated good shot selection with a drop followed by clears. However, the drop was slightly short, allowing Player 2 to gain the advantage.\n* **Rally 6:** A well-executed drive led to Player 1's victory, showcasing their ability to control the pace of the game.\n* **Rally 13:** Player 1 executed a drop shot effectively, but their follow-up clear was too high, allowing Player 2 to regain control.\n\n**Player 2**\n\n**Strengths:**\n\n* Exceptional smashing power\n* Accurate drop shots\n* Quick and agile movement\n\n**Weaknesses:**\n\n* Limited backhand range\n* Tendency to overhit shots\n* Lacks consistency in clears\n\n**Improvement Plan:**\n\n* Introduce specific drills to enhance backhand range and control.\n* Implement a technique to improve shot consistency, emphasizing proper swing mechanics.\n* Emphasize the importance of pacing shots rather than relying solely on power.\n\n**Match Analysis:**\n\n* **Rally 7:** Player 2 demonstrated their exceptional drop shot ability, forcing Player 1 to commit errors.\n* **Rally 11:** A powerful smash and accurate clears showcased Player 2's well-rounded skills.\n* **Rally 15:** Player 2's relentless drop shots and clear shots proved to be too much for Player 1, ultimately leading to their victory.",
-    rallyData : "",
+    summary : "",
+    rallyData : [],
     totalPoints: {
       1: 4,
       2: 11
@@ -64,21 +62,21 @@ const Results = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/get/img`,{
+        const response = await axios.get(`${API_URL}`,{
           headers: {
             "ngrok-skip-browser-warning": "true",
           },
+          withCredentials: true
         });
         console.log(response);
         setImg(response.data);
         const newData = {
-          positionDistribution : URL.createObjectURL(new Blob([response.data.position_distribution], { type: 'image/png' })),
-          positionDistributionP1: URL.createObjectURL(new Blob([response.data.position_distribution_p1], { type: 'image/png' })),
-          rallyTimeDistribution : URL.createObjectURL(new Blob([response.data.rally_time_distribution], { type: 'image/png' })),
-          shotTypeDistributionP1 : URL.createObjectURL(new Blob([response.data.shot_type_distribution_p1], { type: 'image/png' })),
-          shotsDistributionP1 : URL.createObjectURL(new Blob([response.data.shots_distribution_p1], { type: 'image/png' })),
-          shotsDistributionP2 : URL.createObjectURL(new Blob([response.data.shots_distribution_p2], { type: 'image/png' })),
-          summary : response.data.summary,
+          positionDistributionP1: response.data.images.position_distribution_p1,
+          rallyTimeDistribution : response.data.images.rally_time_distribution,
+          shotTypeDistributionP1 : response.data.images.shot_type_distribution_p1,
+          shotsDistributionP1 : response.data.images.shots_distribution_p1,
+          shotsDistributionP2 : response.data.images.shots_distribution_p2,
+          summary : response.data.long_string,
           rallyData : response.data.rally_data,
           totalPoints: response.data.total_points,
           totalShotTypesP1: response.data.total_shot_types_p1,
@@ -87,9 +85,11 @@ const Results = () => {
 
         setResults(newData);
 
-        newRallyData = response.data.rally_data.map((rally, index) => {
-          const player1Shots = rally.player1.shots.split(",");
-          const player2Shots = rally.player2.shots.split(",");
+        console.log(newData);
+
+        const newRallyArrayData = response.data.rally_data.map((rally, index) => {
+          const player1Shots = rally['Player_1_Shots'].split(",");
+          const player2Shots = rally['Player_2_Shots'].split(",");
           const player1ShotsFreq = {
             clear: 0,
             drive: 0,
@@ -107,11 +107,11 @@ const Results = () => {
           });
           player2Shots.forEach(shot => {
             player2ShotsFreq[shot] += 1;
-          });
+          })
 
           return {
-            length: rally.rallyLength,
-            winner: rally.winner,
+            length: rally['Rally_Length'],
+            winner: rally['Winner'],
             player1 : {
               clear: player1ShotsFreq.clear,
               drive: player1ShotsFreq.drive,
@@ -123,15 +123,21 @@ const Results = () => {
               drive: player2ShotsFreq.drive,
               drop: player2ShotsFreq.drop,
               smash: player2ShotsFreq.smash
-            }
+            },
+            rallyNumber: index
           }
-        }); 
 
-        setNewRallyData(newRallyData);
+        })
 
-        setRally(newRallyData[0]);
+        setNewRallyData(newRallyArrayData);
 
-        setRallies(newRallyData.map((rally, index) => `Rally ${index + 1}`));
+        setRally(newRallyArrayData[0]);
+
+        setRallies(newRallyArrayData.map((rally, index) => `Rally ${index + 1}`));
+
+        console.log("NEW RALLY DATA : ");
+
+        console.log(newRallyArrayData);
 
       } catch (error) {
         console.log(error);
@@ -205,14 +211,14 @@ const Results = () => {
                 <div className="tablist">
                   {page === 'Compare' ? (
                     <img
-                      src={img}
+                      src={results.rallyTimeDistribution}
                       width={900}
                       height={500}
                       alt="rally-time-dist"
                     />
                   ) : (
                     <img
-                      src={rallyTimeDistimg}
+                      src={results.rallyTimeDistribution}
                       width={900}
                       height={500}
                       alt="rally-time-dist"
@@ -225,7 +231,7 @@ const Results = () => {
                 <div className="tablist">
                   {page === 'Compare' ? (
                     <img
-                      src={results.positionDistribution}
+                      src={results.positionDistributionP1}
                       width={900}
                       height={500}
                       alt="combined-pos-dist"
@@ -244,7 +250,7 @@ const Results = () => {
               <TabPanel>
                 {page === 'Compare' ? (
                   <img
-                    src={results.shotTypeDistribution}
+                    src={results.shotsDistributionP1}
                     width={900}
                     height={500}
                     alt="combined-pos-dist"
@@ -273,7 +279,10 @@ const Results = () => {
               </TabPanel>
             </Tabs>
             {page === 'Compare' && (
-              <p> {results.summary} </p>
+              <div style={{color:'black'}}>
+                {/* <ReactMarkdown>{results.summary} </ReactMarkdown> */}
+                <p>{results.summary}</p>
+              </div>
             )}
           </div>
         </div>
@@ -325,7 +334,6 @@ const Results = () => {
           <img
             src={winErrorShots}
             className="winErrorShots"
-      
             alt="win-error-shots"
           />
           </div>
