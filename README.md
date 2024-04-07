@@ -92,6 +92,9 @@ A collection of research papers related to badminton AI coaching is available in
 
 Please refer to the respective papers for more detailed information.
 
+### Google Colab Notebook
+
+You can access the Google Colab notebook [here](https://colab.research.google.com/drive/1lyBA13h7edDPfFpxoLN0Ngh403g6TYBv?usp=sharing).
 
 
 
