@@ -12,7 +12,11 @@ const Home = () => {
   const [email, setEmail] = useState("");
 
   const handleChange = (e) => {
-    setVideoLink(e.target.value);
+    if (e.target.name === "videoLink") {
+      setVideoLink(e.target.value);
+    } else {
+      setEmail(e.target.value);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -51,6 +55,7 @@ const Home = () => {
             <input
               type="text"
               id="videoLink"
+              name="videoLink"
               value={videoLink}
               onChange={handleChange}
               placeholder="Enter the Google Drive link of the video"
@@ -60,6 +65,7 @@ const Home = () => {
             <input
               type="email"
               id="email"
+              name="email"
               value={email}
               onChange={handleChange}
               placeholder="Enter your email address"
