@@ -56,6 +56,15 @@ const Home = () => {
               placeholder="Enter the Google Drive link of the video"
               className="input-field"
             />
+            
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={handleChange}
+              placeholder="Enter your email address"
+              className="input-field"
+            />
           </div>
           <button
             className="button submit-button"
