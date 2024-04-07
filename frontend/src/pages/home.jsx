@@ -5,10 +5,11 @@ import "./styles.css";
 import badmintonImage from "../images/download (1).jpeg";
 
 const Home = () => {
-  const API_URL = "https://d9be-34-126-100-141.ngrok-free.app";
+  const API_URL = "https://7d47-35-237-195-78.ngrok-free.app";
   const navigate = useNavigate();
 
   const [videoLink, setVideoLink] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleChange = (e) => {
     setVideoLink(e.target.value);
@@ -18,9 +19,10 @@ const Home = () => {
     try {
       e.preventDefault();
       const response = await axios.post(
-        `${API_URL}/post`,
+        `${API_URL}/images`,
         {
           videoLink: videoLink,
+          email: email,
         },
         {
           headers: {
