@@ -1,52 +1,105 @@
-.main{
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  padding: 0 0 !important;
-  
-    transform:translate(-50px,-50px);
-   
-   
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg, #fdfbfb 0%, #74C6EF 100%);
 }
-.main-2{
-    height: 100%;
-    width:100%;
-}
-.main-1{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color:#5cccc9;
-    width: 50%;
-    height: 100%;
-}
-.div{
-   
-    display: flex;
-    width: 400px;
-    justify-content: space-around;
-    align-items: center;
-}
-.button{
-font: 1.2rem;
-background-color: white;
-color: black;
-padding:10px 20px;
-margin-right: 20px;
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  padding-top: 130px;
+  overflow: hidden; /* Hide overflow to prevent scrollbar */
 }
-.p{
-    color: white;
-    font-size: 2rem;
+
+.content {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
-.h1_1{
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    font-size: 5rem;
+
+.title {
+  color: #333333; /* Title color */
+  font-size: 3rem;
+  margin-bottom: 10px;
+  cursor: pointer; /* Make the title interactive */
+  animation: pulse 2s infinite; /* Add animation to the title */
 }
-.main-2{
-    background-color: pink;
-    width: 50%;
-    height: 100%;
+
+.subtitle {
+  color: #666666; /* Subtitle color */
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.input-field {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #cccccc; /* Input border color */
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.button {
+  font-size: 1.2rem;
+  background-color: #4caf50; /* Button color */
+  color: #ffffff; /* Button text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth hover effect */
+  margin-bottom: 10px;
+}
+
+.button:disabled {
+  opacity: 0.5; /* Reduce opacity for disabled state */
+  cursor: not-allowed;
+}
+
+.submit-button {
+  width: 50%; /* Set width for submit button */
+  margin-right: 10px;
+}
+
+.show-results {
+  background-color: #2196f3; /* Different color for 'Show Results' button */
+}
+
+.show-results:hover {
+  background-color: #1e87db; /* Darker color on hover */
+}
+
+.image-container {
+  margin-left: 20px; /* Added space between content and image */
+}
+
+.image-container img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Box shadow effect */
+  transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+.image-container img:hover {
+  transform: scale(1.1); /* Scale up image on hover */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
