@@ -21,7 +21,7 @@
 }
 .react-tabs .react-tabs__tab {
   color: black; /* Change to desired color */
-  background-color: greenyellow;
+  background-color: #74C6EF;
 font-weight: bold;
   margin-right: 20px;
   font-size: 1rem;
@@ -38,7 +38,7 @@ font-weight: bold;
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background:green; 
+  background:#74C6EF; 
 }
 
 /* Handle on hover */
@@ -100,17 +100,16 @@ margin-bottom: 20px;
  display: flex;
  justify-content: center;
  align-items: center;
- 
+ margin: auto;
  padding: 20px 40px;
 }
 .tablist-2{
-  
   margin-left: 180px;
   margin-bottom: 20px;
 }
 .compare-section-one {
   
-    background: radial-gradient(circle,white,green);
+    background: radial-gradient(circle,white,#74C6EF);
    font-family: 'Courier New', Courier, monospace;
    border: 20px solid black !important;
 border-radius: 20px;
